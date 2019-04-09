@@ -5,23 +5,23 @@ $(document).ready(function() {
 // read() command trigger
 
   $('#read').click(function(event) {
-    // const headers = new Headers({
-    //   "Content-Type": "application/json",
-    // });
-    // fetch('/buy', {
-    //   method: 'post',
-    //   headers: headers,
-    //   body: JSON.stringify({ itemName: $('#itemName').val() }),
-    // })
-    // .then(() => {
-    //   location.reload(true);
-    // })
-    // .catch(function() {
-    //   // Error
-    // });
-  console.log("index is ready"); 
+    const headers = new Headers({
+      "Content-Type": "application/json",
+    });
+    fetch('/read', {
+      method: 'get',
+      headers: headers,
+      // body: JSON.stringify({ itemName: $('#itemName').val() }),
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);  
+      // location.reload(true);
+    })
+    .catch(function() {
+      // Error
+    });
   });
-
 
 // write() command trigger
 
@@ -29,18 +29,21 @@ $(document).ready(function() {
     const headers = new Headers({
       "Content-Type": "application/json",
     });
-    fetch('/buy', {
-      method: 'post',
+    fetch('/write', {
+      method: 'get',
       headers: headers,
-      body: JSON.stringify({ itemName: $('#itemName').val() }),
+      // body: JSON.stringify({ itemName: $('#itemName').val() }),
     })
-    .then(() => {
-      location.reload(true);
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);  
+      // location.reload(true);
     })
     .catch(function() {
       // Error
     });
   });
+
 
 });
 

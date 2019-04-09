@@ -1,5 +1,5 @@
 const express = require('express');
-const contractInstance = require('./deployContract.js');
+const contractInstance = require('./deployedContract.js');
 const web3 = require('./web3Client.js');
 const app = express();
 const bodyParser = require('body-parser');
@@ -13,5 +13,21 @@ app.get('/', function(req, res){
   res.sendFile(path.join(__dirname + 'public/index.html'));
 });
 
+app.get('/read', function(req, res){
+  const x = contractInstance.readX.call({ from: web3.eth.accounts[0] }).toString();
+  console.log(x);
+	res.send({ value : x});
+});
+app.get('/write', function(req, res){
+  contractInstance.writeX({from: web3.eth.accounts[0] }, function(){
+    console.log('su');
+    res.send({ status: 'success'}); 
+  })
 
+  // writeX.call({ from: web3.eth.accounts[0] }).toString();
+});
+
+app.listen(3000, function () {
+  console.log('App ready and listening on port 3000!')
+});
 
