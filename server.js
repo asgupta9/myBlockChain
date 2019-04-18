@@ -16,18 +16,17 @@ app.get('/', function(req, res){
 app.get('/read', function(req, res){
   const x = contractInstance.readX.call({ from: web3.eth.accounts[0] }).toString();
   console.log(x);
-	res.send({ value : x});
+	res.send({ value : x}); 
 });
 app.get('/write', function(req, res){
+  
   contractInstance.writeX({from: web3.eth.accounts[0] }, function(){
-    console.log('su');
+    console.log('success');
     res.send({ status: 'success'}); 
   })
-
-  // writeX.call({ from: web3.eth.accounts[0] }).toString();
 });
 
 app.listen(3000, function () {
-  console.log('App ready and listening on port 3000!')
+  console.log('listening on 3000 : ')
 });
 
