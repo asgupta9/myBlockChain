@@ -1,4 +1,4 @@
-{
+  {
   "name": "myBlcokchain",
   "version": "1.0.0",
   "description": "Implementing smart contracts using Blockchain to maintain and manage the database consistency while reading and writing simultaneously",

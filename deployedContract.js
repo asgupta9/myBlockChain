@@ -1,12 +1,62 @@
-const fs = require('fs');
+// const fs = require('fs');
 const web3 = require('./web3Client.js');
-const code = fs.readFileSync('myContract.sol').toString();
-const solc = require('solc');	// The  solidity compiler
-const compiledCode = solc.compile(code);
-const abiDefinition = JSON.parse(compiledCode.contracts[':myContract'].interface);
+// const code = fs.readFileSync('myContract.sol').toString();
+// const solc = require('solc');	// The  solidity compiler
+// const compiledCode = solc.compile(code);
+const abiDefinition = [
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "readX",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"type": "function",
+		"stateMutability": "nonpayable"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "set",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"type": "function",
+		"stateMutability": "nonpayable"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "arg",
+				"type": "uint256"
+			}
+		],
+		"name": "writeX",
+		"outputs": [],
+		"payable": false,
+		"type": "function",
+		"stateMutability": "nonpayable"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"type": "constructor",
+		"stateMutability": "nonpayable"
+	}
+];
 const myContract = web3.eth.contract(abiDefinition);
-const byteCode = compiledCode.contracts[':myContract'].bytecode;
-const deployedMyContract = myContract.new({ data: byteCode, from: web3.eth.accounts[0], gas: 4700000 });
+// const byteCode = compiledCode.contracts[':myContract'].bytecode;
+// const deployedMyContract = myContract.new({ data: byteCode, from: web3.eth.accounts[0], gas: 4700000 });
+const deployedMyContract = myContract.at('0xe6b976120cadb8fb0cac46a6ef572d4638972de5');
 
 module.exports = deployedMyContract;
 
@@ -60,3 +110,5 @@ module.exports = deployedMyContract;
 // }).catch(err => {
 //     console.log("Error: failed to deploy, detail:", err)
 // });
+
+

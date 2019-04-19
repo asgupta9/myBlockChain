@@ -18,12 +18,15 @@ app.get('/read', function(req, res){
   console.log(x);
 	res.send({ value : x}); 
 });
-app.get('/write', function(req, res){
-  
-  contractInstance.writeX({from: web3.eth.accounts[0] }, function(){
-    console.log('success');
+app.get('/write/:values', function(req, res){
+ 
+  var valueToWrite = req.params.values;
+  console.log(valueToWrite);
+
+  contractInstance.writeX(valueToWrite, {from: web3.eth.accounts[0] }, function(){
     res.send({ status: 'success'}); 
   })
+
 });
 
 app.listen(3000, function () {

@@ -21,7 +21,6 @@ contract myContract{
     function readX() public returns (uint256){
         flag[0] = 1;
         turn = 1;
-
         while( flag[1] == 1 && turn == 1){}
         y = x;
         return (y * set());
